@@ -1,0 +1,54 @@
+def rotate_right(binary, positions):
+    value = int(binary, 2)
+
+    print("Original binary:", binary)
+    print("Operation: ROR")
+    print("Number of positions:", positions)
+
+    for i in range(positions):
+        
+        lsb = value & 1
+
+        
+        value = (value >> 1) | (lsb << 7)
+
+        print(f"After rotation {i + 1}: {value:08b}")
+
+    print("Final ROR result:", format(value, "08b"))
+    print()
+
+
+def rotate_right_carry(binary, positions, carry):
+    value = int(binary, 2)
+
+    print("Original binary:", binary)
+    print("Operation: RCR")
+    print("Initial carry:", carry)
+    print("Number of positions:", positions)
+
+    for i in range(positions):
+        
+        lsb = value & 1
+
+        
+        value = (value >> 1) | (carry << 7)
+
+        
+        carry = lsb
+
+        print(
+            f"After rotation {i + 1}: "
+            f"{value:08b}, Carry = {carry}"
+        )
+
+    print("Final RCR result:", format(value, "08b"))
+    print("Final carry:", carry)
+
+
+binary = "11010101"
+
+print("(a) Rotate Right without Carry (ROR)")
+rotate_right(binary, 2)
+
+print("(b) Rotate Right with Carry (RCR)")
+rotate_right_carry(binary, 2, 0)
