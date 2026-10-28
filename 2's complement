@@ -1,0 +1,41 @@
+def to_binary(n):
+    return format(n & 0xFF, "08b")
+
+
+def from_binary(binary):
+    value = int(binary, 2)
+    if value >= 128:
+        value -= 256
+    return value
+
+
+def calculate(a, b, operation):
+    A = to_binary(a)
+    B = to_binary(b)
+
+    if operation == "+":
+        mathematical_result = a + b
+    else:
+        mathematical_result = a - b
+
+    result = mathematical_result & 0xFF
+    binary_result = format(result, "08b")
+    decimal_result = from_binary(binary_result)
+
+
+    overflow = mathematical_result < -128 or mathematical_result > 127
+
+    print("Operand A:", A, "=", a)
+    print("Operand B:", B, "=", b)
+    print("Operation:", operation)
+    print("Result in binary:", binary_result)
+    print("Result in decimal:", decimal_result)
+    print("Arithmetic overflow:", "Yes" if overflow else "No")
+    print("-" * 40)
+
+
+print("(a) (+48) + (+23)")
+calculate(48, 23, "+")
+
+print("(b) (-46) - (-29)")
+calculate(-46, -29, "-")
